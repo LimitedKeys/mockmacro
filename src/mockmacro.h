@@ -1,4 +1,59 @@
 // 2021 R
+/**
+ * Mock Macros
+ * -----------
+ *
+ * Create mock funtions quickly for testing.
+ *
+ * Say we have the line in our code:
+ *
+ *     #include "test.h"
+ *     uint32_t value = test(1, 2, 3);
+ *
+ * but we can't use the test function in unit
+ * tests. So we'll write unit test version of
+ * 'test.h' and include:
+ *
+ *     MOCK_3ARG(uint32_t, test, int, int, int);
+ *
+ * The retutn value can be set at runtime using:
+ *
+ *     test_return_value
+ *
+ * The value of the input args can be retrieved 
+ * too:
+ *
+ *     test_arg1
+ *     test_arg2
+ *     test_arg3
+ *
+ * The number of times the function has been
+ * called is tracked as well:
+ *
+ *     test_call_count
+ *
+ * MOCK
+ * ----
+ *
+ * Define a test function with no arguments:
+ *
+ *     MOCK(int, x); -> int x(void)
+ *                      x_return_value
+ *                      x_call_count
+ *
+ * MOCK_1ARG
+ * ---------
+ *
+ * Define a mock function with one argument
+ *
+ *     MOCK_1ARG(int, x); -> int x(void)
+ *                           x_arg1
+ *                           x_return_value
+ *                           x_call_count
+ *
+ * MOCK_2ARG See MOCK_1ARG
+ * MOCK_3ARG See MOCK_1ARG
+ */
 
 #ifndef MOCKMACRO_H_
 #define MOCKMACRO_H_
