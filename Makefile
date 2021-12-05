@@ -4,7 +4,11 @@ HDR := src/mockmacro.h
 
 .PHONY: all clean
 
-all: output/mock1.out output/mock2.out output/mock3.out
+all: output/mock1.out output/mock2.out output/mock3.out output/mock4.out
+
+output/mock4.out: tests/mock4/main.c $(HDR)
+	@$(CC) $< -o $@ -Isrc
+	@./$@
 
 output/mock3.out: tests/mock3/main.c $(HDR)
 	@$(CC) $< -o $@ -Isrc

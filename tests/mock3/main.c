@@ -4,7 +4,7 @@
 
 #include "mockmacro.h"
 
-MOCK_1ARG(int, another, uint32_t)
+MOCK_1ARG(int, another, uint32_t);
 
 int main(void) {
 	another_return_value = 10;

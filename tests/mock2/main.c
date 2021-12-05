@@ -3,7 +3,7 @@
 
 #include "mockmacro.h"
 
-MOCK(uint32_t, test)
+MOCK(uint32_t, test);
 
 int main(void)
 {
