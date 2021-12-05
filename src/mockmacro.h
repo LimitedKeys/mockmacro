@@ -3,7 +3,10 @@
 #ifndef MOCKMACRO_H_
 #define MOCKMACRO_H_
 
-#define MOCK(name) \
-	void name(void) {printf(#name);};
+#define MOCK(rt, name) \
+	rt name(void) { \
+		printf(#name); \
+		return (rt)0; \
+	};
 
 #endif  // MOCKMACRO_H_

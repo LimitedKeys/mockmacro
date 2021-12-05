@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <stdint.h>
 
 #include "mockmacro.h"
 
-MOCK(void, test)
+MOCK(uint32_t, test)
 
 int main(void)
 {
-	test();
+	uint32_t value = test();
 	printf(".");
 }
