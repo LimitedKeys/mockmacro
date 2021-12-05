@@ -2,7 +2,7 @@
 
 #include "mockmacro.h"
 
-MOCK(void, test)
+MOCK(int, test)
 
 int main(void)
 {

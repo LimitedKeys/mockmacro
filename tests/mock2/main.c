@@ -7,6 +7,14 @@ MOCK(uint32_t, test)
 
 int main(void)
 {
+	test_return_value = 3;
 	uint32_t value = test();
-	printf(".");
+
+	if (3 == value) {
+		printf(".");
+		return 0;
+	} else {
+		printf("return value not 3: %d", value);
+		return -1;
+	}
 }
