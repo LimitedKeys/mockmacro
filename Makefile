@@ -8,7 +8,17 @@ all: output/mock1.out \
      output/mock2.out \
      output/mock3.out \
      output/mock4.out \
-     output/mock5.out
+     output/mock5.out \
+     output/mock6.out \
+     output/mock7.out
+
+output/mock7.out: tests/mock7/main.c $(HDR)
+	@$(CC) $< -o $@ -Isrc
+	@./$@
+
+output/mock6.out: tests/mock6/main.c $(HDR)
+	@$(CC) $< -o $@ -Isrc
+	@./$@
 
 output/mock5.out: tests/mock5/main.c $(HDR)
 	@$(CC) $< -o $@ -Isrc

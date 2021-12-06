@@ -89,4 +89,39 @@
 		return name ## _return_value; \
 	}
 
+#define MOCK_3ARG(rt, name, arg1_type, \
+                            arg2_type, \
+                            arg3_type) \
+	rt name ## _return_value = (rt)0; \
+	unsigned int name ## _call_count = 0; \
+	arg1_type name ## _arg1; \
+	arg2_type name ## _arg2; \
+	arg3_type name ## _arg3; \
+	rt name(arg1_type arg1, arg2_type arg2, arg3_type arg3) { \
+		name ## _call_count += 1; \
+		name ## _arg1 = arg1; \
+		name ## _arg2 = arg2; \
+		name ## _arg3 = arg3; \
+		return name ## _return_value; \
+	}
+
+#define MOCK_4ARG(rt, name, arg1_type, \
+                            arg2_type, \
+                            arg3_type, \
+                            arg4_type) \
+	rt name ## _return_value = (rt)0; \
+	unsigned int name ## _call_count = 0; \
+	arg1_type name ## _arg1; \
+	arg2_type name ## _arg2; \
+	arg3_type name ## _arg3; \
+	arg4_type name ## _arg4; \
+	rt name(arg1_type arg1, arg2_type arg2, arg3_type arg3, arg4_type arg4) { \
+		name ## _call_count += 1; \
+		name ## _arg1 = arg1; \
+		name ## _arg2 = arg2; \
+		name ## _arg3 = arg3; \
+		name ## _arg4 = arg4; \
+		return name ## _return_value; \
+	}
+
 #endif  // MOCKMACRO_H_
