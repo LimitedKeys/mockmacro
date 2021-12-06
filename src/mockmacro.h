@@ -53,6 +53,7 @@
  *
  * MOCK_2ARG See MOCK_1ARG
  * MOCK_3ARG See MOCK_1ARG
+ * MOCK_4ARG See MOCK_1ARG
  */
 
 #ifndef MOCKMACRO_H_

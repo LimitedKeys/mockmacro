@@ -48,6 +48,7 @@ Macros:
 - MOCK_1ARG
 - MOCK_2ARG
 - MOCK_3ARG
+- MOCK_4ARG
 
 ## Example MOCK
 
