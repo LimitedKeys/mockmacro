@@ -41,19 +41,67 @@
  *                      x_return_value
  *                      x_call_count
  *
- * MOCK_1ARG
- * ---------
+ * The (XARG) versions if this Macro provide the
+ * ability to mock functions with input
+ * arguments. 
  *
- * Define a mock function with one argument
+ * To define a mock function with one argument
  *
  *     MOCK_1ARG(int, x); -> int x(void)
  *                           x_arg1
  *                           x_return_value
  *                           x_call_count
  *
- * MOCK_2ARG See MOCK_1ARG
- * MOCK_3ARG See MOCK_1ARG
- * MOCK_4ARG See MOCK_1ARG
+ * See:
+ *
+ * - MOCK
+ * - MOCK_1ARG
+ * - MOCK_2ARG
+ * - MOCK_3ARG
+ * - MOCK_4ARG
+ *
+ * MOCK_CB
+ * -------
+ *
+ * Define a mock function, which calls the 
+ * provided callback when called. Call count and
+ * return value globals are still available
+ *
+ * 	MOCK_CB(int, x, cb) -> x_call_count
+ *                             x_return_value
+ *                             call cb()
+ *
+ * Related:
+ *
+ * - MOCK_CB
+ * - MOCK_ARG1_CB
+ * - MOCK_ARG2_CB
+ * - MOCK_ARG3_CB
+ * - MOCK_ARG4_CB
+ *
+ * MOCK_SE
+ * -------
+ *
+ * Define a mock function, which calls the 
+ * provided side effect function with the 
+ * function arguments.
+ *
+ * The value returned from the side effect will
+ * be returned.
+ *
+ * The side effect function should have the same
+ * function signiture of the mocked function.
+ *
+ * 	MOCK_SE(int, x, se) -> return se()
+ *                             x_call_count
+ *
+ * Mocking with args and a side effect is 
+ * available as well
+ *
+ * 	MOCK_1ARGS_SE(int, x, int, se) ->
+ *                           return se(x_arg1)
+ *                           x_call_count
+ *                           x_arg1
  */
 
 #ifndef MOCKMACRO_H_
@@ -122,6 +170,28 @@
 		name ## _arg2 = arg2; \
 		name ## _arg3 = arg3; \
 		name ## _arg4 = arg4; \
+		return name ## _return_value; \
+	}
+
+#define MOCK_CB(rt, name, cb) \
+	rt name ## _return_value = (rt)0; \
+	unsigned int name ## _call_count = 0; \
+	rt name() { \
+		name ## _call_count += 1; \
+		cb(); \
+		return name ## _return_value; \
+	}
+
+#define MOCK_ARG1_CB(rt, name, \
+		arg1_type, \
+		cb) \
+	rt name ## _return_value = (rt)0; \
+ 	arg1_type name ## _arg1; \
+	unsigned int name ## _call_count = 0; \
+	rt name(arg1_type arg1) { \
+		name ## _call_count += 1; \
+		name ## _arg1 = arg1; \
+		cb(); \
 		return name ## _return_value; \
 	}
 
