@@ -258,4 +258,11 @@
 		return name ## _return_value; \
 	}
 
+#define MOCK_SE(rt, name, se) \
+	 unsigned int name ## _call_count = 0; \
+         rt name() { \
+		 name ## _call_count += 1; \
+		 return se(); \
+	 }
+
 #endif  // MOCKMACRO_H_
