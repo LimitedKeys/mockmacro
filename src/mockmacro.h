@@ -196,4 +196,19 @@
 		 return se(arg1); \
 	 }
 
+#define MOCK_2ARG_SE(rt, name, \
+		arg1_type, \
+		arg2_type, \
+		se) \
+	 arg1_type name ## _arg1; \
+	 arg2_type name ## _arg2; \
+	 unsigned int name ## _call_count = 0; \
+         rt name(arg1_type arg1, \
+		 arg2_type arg2) { \
+		 name ## _arg1 = arg1; \
+		 name ## _arg2 = arg2; \
+		 name ## _call_count += 1; \
+		 return se(arg1, arg2); \
+	 }
+
 #endif  // MOCKMACRO_H_

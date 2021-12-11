@@ -17,7 +17,12 @@ all: output/mock1.out \
      output/mockB.out \
      output/mockC.out \
      output/mockD.out \
-     output/mockE.out
+     output/mockE.out \
+     output/mockF.out
+
+output/mockF.out: tests/mockF/main.c $(HDR)
+	@$(CC) $< -o $@ -Isrc
+	@./$@
 
 output/mockE.out: tests/mockE/main.c $(HDR)
 	@$(CC) $< -o $@ -Isrc
