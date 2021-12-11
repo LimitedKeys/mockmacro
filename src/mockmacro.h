@@ -211,4 +211,23 @@
 		 return se(arg1, arg2); \
 	 }
 
+#define MOCK_3ARG_SE(rt, name, \
+		arg1_type, \
+		arg2_type, \
+		arg3_type, \
+		se) \
+	 arg1_type name ## _arg1; \
+	 arg2_type name ## _arg2; \
+	 arg3_type name ## _arg3; \
+	 unsigned int name ## _call_count = 0; \
+         rt name(arg1_type arg1, \
+		 arg2_type arg2, \
+		 arg3_type arg3) { \
+		 name ## _arg1 = arg1; \
+		 name ## _arg2 = arg2; \
+		 name ## _arg3 = arg3; \
+		 name ## _call_count += 1; \
+		 return se(arg1, arg2, arg3); \
+	 }
+
 #endif  // MOCKMACRO_H_
