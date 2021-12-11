@@ -26,7 +26,7 @@ tests. So we'll write unit test version of
 
     MOCK_3ARG(uint32_t, test, int, int, int);
 
-The return value can be set at runtime using:
+The retutn value can be set at runtime using:
 
     test_return_value
 
@@ -42,7 +42,26 @@ called is tracked as well:
 
     test_call_count
 
-Macros:
+### MOCK
+
+Define a test function with no arguments:
+
+    MOCK(int, x); -> int x(void)
+                     x_return_value
+                     x_call_count
+
+The (XARG) versions if this Macro provide the
+ability to mock functions with input
+arguments. 
+
+To define a mock function with one argument
+
+    MOCK_1ARG(int, x); -> int x(void)
+                          x_arg1
+                          x_return_value
+                          x_call_count
+
+See:
 
 - MOCK
 - MOCK_1ARG
@@ -50,25 +69,51 @@ Macros:
 - MOCK_3ARG
 - MOCK_4ARG
 
-## Example MOCK
+### MOCK_CB
 
-    MOCK(int, x);
+Define a mock function, which calls the 
+provided callback when called. Call count and
+return value globals are still available
 
-produces:
+	MOCK_CB(int, x, cb) -> x_call_count
+                               x_return_value
+                               call cb()
 
-- int x(void)
-- int x_return_value
-- int x_call_count
+Related:
 
-## Example MOCK_2ARG
+- MOCK_CB
+- MOCK_ARG1_CB
+- MOCK_ARG2_CB
+- MOCK_ARG3_CB
+- MOCK_ARG4_CB
 
-    MOCK_2ARG(int, x, int, char); 
+### MOCK_SE
 
-produces:
+Define a mock function, which calls the 
+provided side effect function with the 
+function arguments.
 
-- int x(void)
-- int x_arg1
-- char x_arg2
-- int x_return_value
-- int x_call_count
+The value returned from the side effect will
+be returned.
 
+The side effect function should have the same
+function signiture of the mocked function.
+
+	MOCK_SE(int, x, se) -> return se()
+                               x_call_count
+
+Mocking with args and a side effect is 
+available as well
+
+	MOCK_1ARG_SE(int, x, int, se) ->
+                        return se(x_arg1)
+                        x_call_count
+                        x_arg1
+
+See:
+
+- MOCK_SE
+- MOCK_1ARG_SE
+- MOCK_2ARG_SE
+- MOCK_3ARG_SE
+- MOCK_4ARG_SE
