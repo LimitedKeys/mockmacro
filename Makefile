@@ -1,8 +1,10 @@
+VERSION := 1.0.0
+ARCHIVE := mockmacro-${VERSION}.zip
 
 OD := $(shell mkdir -p output)
 HDR := src/mockmacro.h
 
-.PHONY: all clean
+.PHONY: all clean save
 
 all: output/mock1.out \
      output/mock2.out \
@@ -92,3 +94,8 @@ output/mock1.out: tests/mock1/main.c $(HDR)
 
 clean:
 	rm -rf output
+
+save: archive/${ARCHIVE}
+
+archive/$(ARCHIVE):
+	git archive -o ./archive/$(ARCHIVE) HEAD
