@@ -2,7 +2,7 @@ VERSION := 1.0.0
 ARCHIVE := mockmacro-${VERSION}.zip
 
 OD := $(shell mkdir -p output)
-HDR := src/mockmacro.h
+HDR := src/mockmacro.h src/mockcheck.h
 
 .PHONY: all clean save
 
@@ -22,7 +22,12 @@ all: output/mock1.out \
      output/mockE.out \
      output/mockF.out \
      output/mockG.out \
-     output/mockH.out
+     output/mockH.out \
+     output/assert1.out
+
+output/assert1.out: tests/assert1/main.c $(HDR)
+	@$(CC) $< -o $@ -Isrc
+	@./$@
 
 output/mockH.out: tests/mockH/main.c $(HDR)
 	@$(CC) $< -o $@ -Isrc
